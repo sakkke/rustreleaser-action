@@ -1,0 +1,5 @@
+name: 'Rustreleaser'
+description: 'Release Rust project'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
