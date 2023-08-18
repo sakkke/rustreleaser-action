@@ -15,6 +15,7 @@ RUN type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y) \
 RUN npm install -g nushell
 RUN pip install cargo-zigbuild
 
+RUN useradd -m build
 USER build
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
