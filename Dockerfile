@@ -1,5 +1,18 @@
-FROM alpine:3.10
+FROM ubuntu:22.04
 
-COPY entrypoint.sh /entrypoint.sh
+RUN apt-get update \
+  && apt-get -y install \
+    curl \
+    npm \
+    python3-pip \
+    sudo
+RUN npm install -g nushell
+RUN pip install cargo-zigbuild
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+USER build
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+COPY entrypoint.nu /entrypoint.nu
+
+ENTRYPOINT [ "/entrypoint.nu" ]
