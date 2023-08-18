@@ -1,4 +1,4 @@
-name: 'Rustreleaser'
+name: 'RustReleaser'
 description: 'Release Rust project'
 runs:
   using: 'docker'
