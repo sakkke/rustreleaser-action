@@ -84,11 +84,12 @@ def package-binaries [targets: list<string>] {
 
   $targets | each {|target|
     let package_name: string = (open Cargo.toml).package.name
+    let ref_name = $env.GITHUB_REF_NAME
 
     let dir = $"target/($target)/release"
 
     let ext = "tar.gz"
-    let archive = $"($package_name)-($target).($ext)"
+    let archive = $"($package_name)-($ref_name)-($target).($ext)"
     let file = $package_name
 
     let file = if (is-windows $target) {
