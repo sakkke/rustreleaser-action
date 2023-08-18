@@ -48,6 +48,7 @@ def main [] {
   add-target $targets
   build-binaries $targets
   package-binaries $targets
+  release-binaries $targets
 
   print 'Build completed!'
 
@@ -98,4 +99,15 @@ def package-binaries [targets: list<string>] {
 
     tar -acC $dir -f $archive $file
   }
+}
+
+def release-binaries [targets: list<string>] {
+  let archives: list<string> = ($targets | each {|target|
+    let package_name: string = (open Cargo.toml).package.name
+    let ext = "tar.gz"
+    let archive = $"($package_name)-($target).($ext)"
+    $archive
+  })
+
+  gh release create $env.GITHUB_REF_NAME $archives
 }
