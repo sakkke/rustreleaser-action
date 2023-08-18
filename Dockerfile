@@ -19,8 +19,8 @@ RUN useradd -m build
 USER build
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN [ "nu", "-c", "echo \"$env.PATH = ($env.PATH | prepend $\"($env.HOME)/.cargo/bin\")\\n\" | save --append $nu.env-path" ]
+RUN [ "nu", "-c", "echo \"$env.PATH = ($env.PATH | prepend $\"($env.HOME)/.cargo/bin\")\\n\" | save --append /home/build/env.nu" ]
 
 COPY entrypoint.nu /entrypoint.nu
 
-ENTRYPOINT [ "/entrypoint.nu" ]
+ENTRYPOINT [ "nu", "--env-config", "/home/build/env.nu", "/entrypoint.nu" ]
