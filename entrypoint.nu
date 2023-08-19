@@ -1,8 +1,6 @@
 #!/usr/bin/env nu
 
 def main [] {
-  $env.PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
-
   let targets = [
     x86_64-apple-darwin
     aarch64-apple-darwin
