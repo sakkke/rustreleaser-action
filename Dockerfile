@@ -22,4 +22,4 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 COPY entrypoint.nu /entrypoint.nu
 
-ENTRYPOINT [ "/entrypoint.nu" ]
+ENTRYPOINT [ "/bin/sh", "-lc", "/entrypoint.nu" ]
