@@ -3,5 +3,3 @@ description: 'Release Rust project'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    GH_WORKSPACE: ${{ github.workspace }}
